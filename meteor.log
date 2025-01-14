@@ -1,0 +1,11 @@
+2024-12-17 16:30:54,705 :: INFO :: Starting import of fastq files from data
+2024-12-17 16:30:54,705 :: ERROR :: No fastq file detected
+2024-12-18 11:15:07,730 :: INFO :: Number of unmapped reads: 29889091
+2024-12-18 11:15:07,773 :: INFO :: No rarefaction.
+2024-12-18 11:15:07,773 :: INFO :: Run coverage normalization.
+2024-12-18 11:15:07,785 :: INFO :: Save gene table.
+2024-12-18 11:15:07,947 :: INFO :: Get MSP core genes.
+2024-12-18 11:15:09,605 :: INFO :: Compute MSP profiles.
+2024-12-18 11:15:12,751 :: INFO :: Save MSP profiles.
+2024-12-18 11:15:12,753 :: INFO :: Compute MSP stats.
+2024-12-18 11:15:14,398 :: INFO :: Process ended without errors.
