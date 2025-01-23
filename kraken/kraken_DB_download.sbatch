@@ -6,5 +6,6 @@
 
 module load conda
 conda activate kraken2
-kraken2-build --standard --threads $SLURM_CPUS_PER_TASK --db /shared/projects/mudis4ls_is4_benchmark/BDs
+DB_DIR="/shared/projects/mudis4ls_is4_benchmark/BDs"
+kraken2-build --standard --threads $SLURM_CPUS_PER_TASK --db $DB_DIR
 
