@@ -2,7 +2,7 @@
 # https://ifb-elixirfr.gitlab.io/cluster/doc/quick-start/#1-write-a-bash-script
 #SBATCH --job-name=kraken_install_db
 #SBATCH --mem=120GB
-#SBATCH --cpus-per-task=10
+#SBATCH --cpus-per-task=32
 # Définir le chemin vers l'environnement Conda
 CONDA_ENV_PATH="/shared/projects/mudis4ls_is4_benchmark/conda/envs/kraken2"
 
