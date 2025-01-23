@@ -1,30 +1,7 @@
-/!\ Your current default is demo with limited resources.
-If you already have a project/account, check status_bars --help to change it as default. Otherwise, you have to request one from the platform.
-
-Update: 2025-01-13 17:00 - Your current default account is demo - More info: status_bars --help
-vashokan@clust-slurm-client2:~$ status_bars --help
-    WHY:
-      Even if no billing is applied yet, it will allow you to manage your account resources.
-      If you are on different projects/accounts, you can distribute your consumption.
-    USAGE:
-      status_bars
-      status_bars cnorris
-      status_bars my_project
-    ACCOUNTS:
-      Your default account is in bold
+status_bars --help 
       To change your default account:
         sacctmgr update user $USER set defaultaccount=<project-name>
       To submit a job at runtime on a specific account
         sbatch -A <project-name> script.sbatch
-    LEGEND:
-      hCPU : CPU  usage / quota in hour CPU
-      GB   : Disk usage / quota in GB
-      FILES: Nbr of files / quota of inodes
-      [#-] : below 75%
-      [#-] : between 75% and 90%
-      [#-] : over 90%
-    SETTINGS:
-      TO disable the status bars or one of them
-      echo "export STATUS_BAR=0" >> ~/.status_bars.conf.sh
-      echo "export STATUS_BAR_CPU=0" >> ~/.status_bars.conf.sh
-      echo "export STATUS_BAR_DATA=0" >> ~/.status_bars.conf.sh
+
+sacctmgr update user $USER set defaultaccount=mudis4ls_is4_benchmark
