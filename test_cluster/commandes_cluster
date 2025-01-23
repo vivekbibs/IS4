@@ -9,3 +9,5 @@ sacctmgr update user $USER set defaultaccount=mudis4ls_is4_benchmark
 squeue -u vashokan 
 Information on running job: scontrol show job <jobid>
 Delete a job: scancel <jobid>
+-output=slurm-%j.out`	Specify the output file (standard output and error, default = slurm-[jobid].out)
+--chdir=/path/`	Working directory (default = submission directory)
