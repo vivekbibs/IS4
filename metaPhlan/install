@@ -1,0 +1,7 @@
+https://github.com/biobakery/MetaPhlAn/wiki/MetaPhlAn-4#installation
+If you have installed MetaPhlAn using Anaconda, it is advised to install the database in a folder outside the Conda environment. To do this, run
+
+$ metaphlan --install --bowtie2db <database folder>
+If you install the database in a different location, remember to run MetaPhlAn using --bowtie2db <database folder>!
+
+conda create --name metaphlan -c bioconda metaphlan
