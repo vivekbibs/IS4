@@ -5,3 +5,5 @@ status_bars --help
         sbatch -A <project-name> script.sbatch
 
 sacctmgr update user $USER set defaultaccount=mudis4ls_is4_benchmark
+
+squeue -u vashokan 
