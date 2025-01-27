@@ -1,0 +1,6 @@
+sylph sketch o157_reads.fastq.gz e.coli*.fa.gz -o database
+sylph sketch o157_reads.fastq.gz e.coli*.fa -o database
+
+#marche
+sylph sketch o157_reads.fastq.gz e.coli*.fasta.gz -o database
+#marche

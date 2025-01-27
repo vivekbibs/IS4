@@ -5,3 +5,13 @@ $ metaphlan --install --bowtie2db <database folder>
 If you install the database in a different location, remember to run MetaPhlAn using --bowtie2db <database folder>!
 
 conda create --name metaphlan -c bioconda metaphlan
+
+https://github.com/biobakery/MetaPhlAn/wiki/MetaPhlAn-4#installation
+metaphlan --install --bowtie2db /shared/projects/mudis4ls_is4_benchmark/BDs
+If you install the database in a different location, remember to run MetaPhlAn using --bowtie2db <database folder>!
+conda remove -n metaphlan metaphlan
+
+
+conda install -c bioconda -c conda-forge metaphlan=4.1.1 python=3.7
+conda install -c conda-forge -c bioconda metaphlan
+conda install metaphlan=4.1.1 -c bioconda -c conda-forge
