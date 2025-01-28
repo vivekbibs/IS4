@@ -1,0 +1,4 @@
+find . -name "*db*" -o -name "*database*"
+./lib/python3.9/site-packages/motus/db_mOTU
+
+find . -name "db_mOTU"
