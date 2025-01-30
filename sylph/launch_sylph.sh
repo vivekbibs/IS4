@@ -19,4 +19,4 @@ output_dir="/shared/projects/mudis4ls_is4_benchmark/test_results/sylph"
 mkdir -p $output_dir
 
 # Exécuter sylph 
-sylph profile $sylph_bd_path $fastq_file_path -t $SLURM_CPUS_PER_TASK > "$output_dir/profiling.tsv"
+sylph profile $sylph_bd_path $fastq_file_path -t $SLURM_CPUS_PER_TASK -o "$output_dir/profiling.tsv"
