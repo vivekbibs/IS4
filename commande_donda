@@ -9,3 +9,5 @@ Or to execute a single command in this environment, use:
 
 
 conda create -n kraken2 kraken2
+
+conda env remove --name metaphlan
