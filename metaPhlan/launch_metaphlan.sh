@@ -4,7 +4,7 @@
 #SBATCH --cpus-per-task=5
 
 # Activer l'environnement Conda 
-source /shared/projects/mudis4ls_is4_benchmark/conda/bin/activate metaphlan
+source source /shared/projects/mudis4ls_is4_benchmark/miniforge3/bin/activate /shared/projects/mudis4ls_is4_benchmark/conda/envs/metaphlan
 
 # Définir les variables
 fastq_dir="/shared/projects/mudis4ls_is4_benchmark/test_data_meteor/fastq/"
