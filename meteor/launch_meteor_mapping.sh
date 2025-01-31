@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=meteor_fastq_mapping
 #SBATCH --mem=150GB
-#SBATCH --cpus-per-task=6
+#SBATCH --cpus-per-task=5
 
 # Activer l'environnement Conda 
 source /shared/projects/mudis4ls_is4_benchmark/miniforge3/bin/activate /shared/projects/mudis4ls_is4_benchmark/conda/envs/meteor
