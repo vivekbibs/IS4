@@ -1,0 +1,25 @@
+meteor download -i <name> -c -o <refdir>
+
+meteor download -i human_gut -c -o /shared/projects/mudis4ls_is4_benchmark/BDs
+
+meteor fastq -i data -o output_test
+
+meteor mapping -i output_test/SRR31719427 -r ref_dir/hs_10_4_gut_taxo -o mapping_dir
+
+
+
+meteor profile -i mappingdir/SRR31719427 -o profiledir -r refdir/hs_10_4_gut_taxo
+fastq-dump --stdout -X 2 SRR31719427
+
+fastq-dump --stdout SRR31719427 > /home/vashokan/Bureau/code/test_meteor/data/SRR31719427.fastq
+
+
+meteor mapping -i /shared/projects/mudis4ls_is4_benchmark/test_data_meteor/fastq/ERS12377136.fastq.gz \
+-r /shared/projects/mudis4ls_is4_benchmark/BDs/hs_10_4_gut \
+-o /shared/projects/mudis4ls_is4_benchmark/test_results/meteor/mapping \
+-t $SLURM_CPUS_PER_TASK
+
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  -i FASTQ_DIR          Directory corresponding to the sample to process.
+                        (contains sequencing metadata files ending with _census_stage_0.json)
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
