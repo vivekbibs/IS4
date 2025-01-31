@@ -9,3 +9,7 @@
 2024-12-18 11:15:12,751 :: INFO :: Save MSP profiles.
 2024-12-18 11:15:12,753 :: INFO :: Compute MSP stats.
 2024-12-18 11:15:14,398 :: INFO :: Process ended without errors.
+2025-01-31 17:48:41,902 :: INFO :: Starting import of fastq files from /shared/projects/mudis4ls_is4_benchmark/test_data_meteor/only_one/fastq
+2025-01-31 17:48:41,918 :: INFO :: 1 fastq files detected
+2025-01-31 17:48:41,918 :: INFO :: Importing /shared/projects/mudis4ls_is4_benchmark/test_data_meteor/only_one/fastq/ERS12377136.fastq.gz in sample ERS12377136
+2025-01-31 17:48:41,927 :: INFO :: 1/1 fastq files imported in 1 samples
