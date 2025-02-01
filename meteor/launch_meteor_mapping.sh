@@ -23,7 +23,7 @@ mkdir -p $output_dir
 
 
 meteor fastq -i "$fastq_dir" \
--o "$dir/sample/"
+-o "$fastq_dir/sample/"
 
 meteor mapping -i $fastq_dir \
 -r $meteor_bd_path \
