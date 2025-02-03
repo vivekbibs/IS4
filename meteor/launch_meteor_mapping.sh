@@ -25,7 +25,9 @@ mkdir -p $output_dir
 meteor fastq -i "$fastq_dir" \
 -o "$fastq_dir"
 
-meteor mapping -i $fastq_dir \
+# meteor veut dans -i le directory ou on a le fastq importe et le census8_stage.json.
+#Ici dans le cas d'un fastq test le directory $fastq_dir/ERS12377136 est automatiquement crée par meteor
+meteor mapping -i "$fastq_dir/ERS12377136" \
 -r $meteor_bd_path \
 -o $output_dir \
 -t $SLURM_CPUS_PER_TASK
