@@ -32,3 +32,4 @@ meteor mapping -i "$fastq_dir/ERS12377136" \
 -o $output_dir \
 -t $SLURM_CPUS_PER_TASK
 
+mamba env remove --name kraken
