@@ -3,6 +3,8 @@
 #SBATCH --job-name=bracken_classify
 #SBATCH --mem=120GB
 #SBATCH --cpus-per-task=10
+#SBATCH -o bracken_less_threads.out  
+#SBATCH -e bracken_less_threads.err
 # Activer l'environnement Conda 
 source /shared/projects/mudis4ls_is4_benchmark/miniforge3/bin/activate /shared/projects/mudis4ls_is4_benchmark/conda/envs/bracken
 
