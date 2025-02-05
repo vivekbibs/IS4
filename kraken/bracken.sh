@@ -2,7 +2,7 @@
 # https://ifb-elixirfr.gitlab.io/cluster/doc/quick-start/#1-write-a-bash-script
 #SBATCH --job-name=bracken_classify
 #SBATCH --mem=120GB
-#SBATCH --cpus-per-task=15
+#SBATCH --cpus-per-task=10
 # Activer l'environnement Conda 
 source /shared/projects/mudis4ls_is4_benchmark/miniforge3/bin/activate /shared/projects/mudis4ls_is4_benchmark/conda/envs/bracken
 
