@@ -8,8 +8,8 @@ source /shared/projects/mudis4ls_is4_benchmark/miniforge3/bin/activate /shared/p
 
 
 DB_DIR="/shared/projects/mudis4ls_is4_benchmark/BDs"
-KRAKEN_INSTALLATION="/shared/projects/mudis4ls_is4_benchmark/conda/pkgs/kraken2-2.1.3-pl5321h077b44d_4/share/kraken2-2.1.3-4"
+
 # k=35 pour kraken2, default kmer length
-bracken-build -y "2.1.3" -d ${KRAKEN_DB} -t $SLURM_CPUS_PER_TASK -k ${KMER_LEN} -l ${READ_LEN} 
+bracken-build -y "kraken2" -d $DB_DIR -t ${SLURM_CPUS_PER_TASK} -k ${KMER_LEN} -l ${READ_LEN} 
 # Ici on va spécifier la version directement en brut, mais plus tard on assignera au flag y la sortie de terminal de "chemin_vers_kraken2 --version"
 # pour que ce soit plus propre
