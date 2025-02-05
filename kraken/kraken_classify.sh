@@ -4,7 +4,7 @@
 #SBATCH --mem=120GB
 #SBATCH --cpus-per-task=24
 # Activer l'environnement Conda 
-source /shared/projects/mudis4ls_is4_benchmark/miniforge3/bin/activate /shared/projects/mudis4ls_is4_benchmark/conda/envs/kraken2
+source /shared/projects/mudis4ls_is4_benchmark/miniforge3/bin/activate /shared/projects/mudis4ls_is4_benchmark/conda/envs/kraken
 
 # module load conda
 # conda activate kraken2
