@@ -15,3 +15,9 @@ output_file="$output_dir/kraken_test.tsv"
 
 kraken2 --db $DB_DIR --threads $SLURM_CPUS_PER_TASK --output $output_file $seq
 
+# Loading database information... done.
+# 100000 sequences (14.61 Mbp) processed in 0.821s (7306.8 Kseq/m, 1067.27 Mbp/m).
+#   72233 sequences classified (72.23%)
+#   27767 sequences unclassified (27.77%)
+# (END)
+
