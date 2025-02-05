@@ -16,6 +16,6 @@ sylph-tax download --download-to /any/location
 sylph profile gtdb-r220-c200-dbv1.syldb ... -o sylph_results/out.tsv
 
 # incorporate GTDB-r220 taxonomy into sylph's results
-sylph-tax taxprof sylph_results/*.tsv -t GTDB_r220 
+sylph-tax taxprof /shared/projects/mudis4ls_is4_benchmark/test_results/sylph/profiling.tsv -t GTDB_r220 
 
 ls *.sylphmpa

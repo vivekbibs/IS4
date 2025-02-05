@@ -23,3 +23,5 @@ meteor mapping -i /shared/projects/mudis4ls_is4_benchmark/test_data_meteor/fastq
   -i FASTQ_DIR          Directory corresponding to the sample to process.
                         (contains sequencing metadata files ending with _census_stage_0.json)
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+#Avant meteor mapping faut faire meteor fastq ? https://github.com/metagenopolis/meteor/wiki#2-organize-your-sample-directory 
