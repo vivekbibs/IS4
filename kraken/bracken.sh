@@ -1,7 +1,7 @@
 #!/bin/bash
 # https://ifb-elixirfr.gitlab.io/cluster/doc/quick-start/#1-write-a-bash-script
 #SBATCH --job-name=bracken_classify
-#SBATCH --mem=120GB
+#SBATCH --mem=250GB
 #SBATCH --cpus-per-task=10
 #SBATCH -o bracken_less_threads.out  
 #SBATCH -e bracken_less_threads.err
