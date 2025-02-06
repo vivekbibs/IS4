@@ -3,6 +3,8 @@
 #SBATCH --job-name=kraken_classify
 #SBATCH --mem=120GB
 #SBATCH --cpus-per-task=24
+#SBATCH -o slurm.%x.%j.out  # STDOUT file with the Job Name and the Job ID
+#SBATCH -e slurm.%x.%j.err  # STDERR file with the Job Name and the Job ID
 # Activer l'environnement Conda 
 source /shared/projects/mudis4ls_is4_benchmark/miniforge3/bin/activate /shared/projects/mudis4ls_is4_benchmark/conda/envs/kraken
 
