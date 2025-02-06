@@ -14,3 +14,5 @@ output_dir="/shared/projects/mudis4ls_is4_benchmark/test_results/metaphlan"
 
 
 sgb_to_gtdb_profile.py -i $metaphlan_output -o "$output_dir/metaphlan_output_gtdb.txt"
+
+#/shared/projects/mudis4ls_is4_benchmark/conda/envs/metaphlan/lib/python3.9/site-packages/metaphlan/utils/ path des scripts de passage vers gtdb
