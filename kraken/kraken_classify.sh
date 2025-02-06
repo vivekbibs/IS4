@@ -1,8 +1,8 @@
 #!/bin/bash
 # https://ifb-elixirfr.gitlab.io/cluster/doc/quick-start/#1-write-a-bash-script
 #SBATCH --job-name=kraken_classify
-#SBATCH --mem=120GB
-#SBATCH --cpus-per-task=24
+#SBATCH --mem=150GB
+#SBATCH --cpus-per-task=15
 #SBATCH -o slurm.%x.%j.out  # STDOUT file with the Job Name and the Job ID
 #SBATCH -e slurm.%x.%j.err  # STDERR file with the Job Name and the Job ID
 # Activer l'environnement Conda 
@@ -15,7 +15,7 @@ seq="/shared/projects/mudis4ls_is4_benchmark/test_data_meteor/only_one/fastq/ERS
 output_dir="/shared/projects/mudis4ls_is4_benchmark/test_results/kraken"
 output_file="$output_dir/kraken_test.tsv"
 
-kraken2 --db $DB_DIR --threads $SLURM_CPUS_PER_TASK --output $output_file $seq
+kraken2 --db $DB_DIR --threads ${SLURM_CPUS_PER_TASK} --report "$output_dir/test.kreport" $seq > $output_file
 
 # Loading database information... done.
 # 100000 sequences (14.61 Mbp) processed in 0.821s (7306.8 Kseq/m, 1067.27 Mbp/m).

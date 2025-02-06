@@ -11,3 +11,8 @@ Information on running job: scontrol show job <jobid>
 Delete a job: scancel <jobid>
 -output=slurm-%j.out`	Specify the output file (standard output and error, default = slurm-[jobid].out)
 --chdir=/path/`	Working directory (default = submission directory)
+
+
+scontrol show job <job_id>
+sstat --format=JobID,AllocCPUs,AveCPU,AveRSS,MaxRSS -j <job_id>
+squeue -j <job_id> -o "%i %C"
