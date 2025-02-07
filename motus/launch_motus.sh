@@ -1,14 +1,15 @@
 #!/bin/bash
-#SBATCH --job-name=metaphlan_test
+#SBATCH --job-name=motus_full_taxons
 #SBATCH --mem=150GB
 #SBATCH --cpus-per-task=10
-
+#SBATCH -o slurm.%x.%j.out  # STDOUT file with the Job Name and the Job ID
+#SBATCH -e slurm.%x.%j.err  # STDERR file with the Job Name and the Job ID
 # Activer l'environnement Conda 
 source /shared/projects/mudis4ls_is4_benchmark/miniforge3/bin/activate /shared/projects/mudis4ls_is4_benchmark/conda/envs/motus
 
 # Définir les variables
 
-fastq_dir="/shared/projects/mudis4ls_is4_benchmark/test_data_meteor/fastq/"
+fastq_dir="/shared/projects/mudis4ls_is4_benchmark/test_data_meteor/only_one/fastq/"
 fastq_file="ERS12377136.fastq.gz"
 name="${fastq_file%.fastq.gz}"
 
