@@ -10,7 +10,7 @@ source /shared/projects/mudis4ls_is4_benchmark/miniforge3/bin/activate /shared/p
 
 # module load conda
 # conda activate kraken2
-DB_DIR="/shared/projects/mudis4ls_is4_benchmark/BDs"
+DB_DIR="/shared/projects/mudis4ls_is4_benchmark/BDs/kraken"
 seq="/shared/projects/mudis4ls_is4_benchmark/test_data_meteor/only_one/fastq/ERS12377136.fastq.gz"
 output_dir="/shared/projects/mudis4ls_is4_benchmark/test_results/kraken"
 output_file="$output_dir/kraken_test.tsv"

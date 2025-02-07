@@ -9,7 +9,7 @@
 source /shared/projects/mudis4ls_is4_benchmark/miniforge3/bin/activate /shared/projects/mudis4ls_is4_benchmark/conda/envs/bracken
 
 
-DB_DIR="/shared/projects/mudis4ls_is4_benchmark/BDs"
+DB_DIR="/shared/projects/mudis4ls_is4_benchmark/BDs/kraken"
 
 # k=35 pour kraken2, default kmer length
 bracken-build -d $DB_DIR -t ${SLURM_CPUS_PER_TASK}
