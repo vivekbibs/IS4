@@ -29,3 +29,4 @@ motus profile -s $fastq_file_path -n $name -t ${SLURM_CPUS_PER_TASK} -A > "$outp
 # With -q you can print the full rank taxonomy (up to the one selected with -k)
 
 # With -A is possible to print all levels together.
+# Total time: 37.58 s

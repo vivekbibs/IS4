@@ -1,0 +1,9 @@
+# Définir un fichier log pour le temps
+TIME_LOG="time_${SLURM_JOB_ID}.log"
+
+# Exécuter la commande avec `time` et enregistrer les résultats
+{ time ./mon_script.sh; } 2> "$TIME_LOG"
+
+🔹 Méthode 3 : Utiliser Slurm directement
+Slurm fournit des informations sur l'utilisation des ressources après l'exécution d'un job. Ajoute cette ligne à la fin de ton script :
+sacct -j $SLURM_JOB_ID --format=JobID,JobName,Elapsed,TotalCPU,MaxRSS > slurm_stats_${SLURM_JOB_ID}.log

@@ -1,0 +1,1 @@
+(time mamba install -c bioconda motus) 2>&1 | tee motus_install.log
