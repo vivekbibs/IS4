@@ -1,7 +1,7 @@
 #!/bin/bash
 # https://ifb-elixirfr.gitlab.io/cluster/doc/quick-start/#1-write-a-bash-script
 #SBATCH --job-name=kraken_classify_gtdb
-#SBATCH --mem=400GB
+#SBATCH --mem=500GB
 #SBATCH --cpus-per-task=15
 #SBATCH -o slurm.%x.%j.out  # STDOUT file with the Job Name and the Job ID
 #SBATCH -e slurm.%x.%j.err  # STDERR file with the Job Name and the Job ID
