@@ -1,1 +1,7 @@
 (time mamba install -c bioconda motus) 2>&1 | tee motus_install.log
+Cela affichera trois durées à la fin :
+
+real : temps total écoulé
+user : temps CPU utilisé par les processus utilisateur
+sys : temps CPU utilisé par les processus système
+
