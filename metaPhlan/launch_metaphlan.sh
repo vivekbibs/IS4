@@ -18,3 +18,17 @@ output_dir="/shared/projects/mudis4ls_is4_benchmark/test_results/metaphlan"
 metaphlan "$fastq_file_path" --bowtie2out "$output_dir/metagenome.bowtie2.bz2" \
           --nproc "$SLURM_CPUS_PER_TASK" --input_type fastq \
           -o "$output_dir/profiled_metagenome.txt"
+
+# Post-mapping arguments:
+#   --tax_lev TAXONOMIC_LEVEL
+#                         The taxonomic level for the relative abundance output:
+#                         'a' : all taxonomic levels
+#                         'k' : kingdoms
+#                         'p' : phyla only
+#                         'c' : classes only
+#                         'o' : orders only
+#                         'f' : families only
+#                         'g' : genera only
+#                         's' : species only
+#                         't' : SGBs only
+#                         [default 'a']

@@ -1,8 +1,8 @@
 #!/bin/bash
 # https://ifb-elixirfr.gitlab.io/cluster/doc/quick-start/#1-write-a-bash-script
-#SBATCH --job-name=kraken_classify_gtdb
+#SBATCH --job-name=kraken_classify_gtdb_mpa_style
 #SBATCH --mem=500GB
-#SBATCH --cpus-per-task=15
+#SBATCH --cpus-per-task=10
 #SBATCH -o slurm.%x.%j.out  # STDOUT file with the Job Name and the Job ID
 #SBATCH -e slurm.%x.%j.err  # STDERR file with the Job Name and the Job ID
 # Activer l'environnement Conda 
@@ -13,9 +13,9 @@ source /shared/projects/mudis4ls_is4_benchmark/miniforge3/bin/activate /shared/p
 DB_DIR="/shared/projects/mudis4ls_is4_benchmark/BDs/kraken/gtdb"
 seq="/shared/projects/mudis4ls_is4_benchmark/test_data_meteor/only_one/fastq/ERS12377136.fastq.gz"
 output_dir="/shared/projects/mudis4ls_is4_benchmark/test_results/kraken/gtdb"
-output_file="$output_dir/kraken_test_no_mpa.tsv"
+output_file="$output_dir/kraken_mpa_style.tsv"
 mkdir -p "$output_dir/logs"
-kraken2 --db $DB_DIR --threads ${SLURM_CPUS_PER_TASK} --report "$output_dir/test.kreport" $seq > $output_file
+kraken2 --db $DB_DIR --use-mpa-style --threads ${SLURM_CPUS_PER_TASK} --report "$output_dir/test.kreport" $seq > $output_file
 sacct -j $SLURM_JOB_ID --format=JobID,JobName,Elapsed,TotalCPU,MaxRSS,CPUTime,CPUTimeRAW > "$output_dir/logs/slurm_stats_${SLURM_JOB_NAME}.log"
 # Loading database information... done.
 # 100000 sequences (14.61 Mbp) processed in 0.821s (7306.8 Kseq/m, 1067.27 Mbp/m).
