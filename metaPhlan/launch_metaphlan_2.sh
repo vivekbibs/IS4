@@ -12,12 +12,18 @@ fastq_file="ERS12377136.fastq.gz"
 fastq_file_path="${fastq_dir}${fastq_file}"
 
 # Définir le répertoire de sortie
-output_dir="/shared/projects/mudis4ls_is4_benchmark/test_results/metaphlan"
-
+output_dir="/shared/projects/mudis4ls_is4_benchmark/test_results/re_metaphlan/"
+metaphlan_output="$output_dir/profiled_metagenome.txt"
 # Exécuter MetaPhlAn 
 metaphlan "$fastq_file_path" --bowtie2out "$output_dir/metagenome.bowtie2.bz2" \
           --nproc "$SLURM_CPUS_PER_TASK" --input_type fastq \
-          -o "$output_dir/profiled_metagenome.txt"
+          -o $metaphlan_output
+
+
+
+
+
+sgb_to_gtdb_profile.py -i $metaphlan_output -o "$output_dir/metaphlan_output_gtdb.txt"
 
 # Post-mapping arguments:
 #   --tax_lev TAXONOMIC_LEVEL
@@ -32,3 +38,5 @@ metaphlan "$fastq_file_path" --bowtie2out "$output_dir/metagenome.bowtie2.bz2" \
 #                         's' : species only
 #                         't' : SGBs only
 #                         [default 'a']
+
+sacct -j $SLURM_JOB_ID --format=JobID,JobName,Elapsed,TotalCPU,MaxRSS,CPUTime,CPUTimeRAW > "$output_dir/logs/slurm_stats_${SLURM_JOB_NAME}.log"
