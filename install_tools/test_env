@@ -1,0 +1,8 @@
+name: meteor-2.0.18
+channels:
+  - conda-forge  # Pour les dépendances générales
+  - bioconda     # Priorité pour les outils bioinfo
+  - defaults
+dependencies:
+  - bioconda::meteor=2.0.18  # Spécifiez le canal si nécessaire
+
