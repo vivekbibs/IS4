@@ -1,0 +1,11 @@
+https://github.com/CAMI-challenge/OPAL/blob/master/data/goldstandard_low_1.bin
+
+
+./opal.py -g /shared/projects/mudis4ls_is4_benchmark/test_results/opal/goldstandard_low_1.bin \
+/shared/projects/mudis4ls_is4_benchmark/test_results/opal/bracken.tsv \
+/shared/projects/mudis4ls_is4_benchmark/test_results/opal/metaphlan_species.tsv \
+/shared/projects/mudis4ls_is4_benchmark/test_results/opal/meteor.tsv \
+/shared/projects/mudis4ls_is4_benchmark/test_results/opal/sylph_species.tsv \
+-l "Bracken, Metaphlan, meteor, Sylph" \
+-o /shared/projects/mudis4ls_is4_benchmark/test_results/opal
+-r "species, species"
