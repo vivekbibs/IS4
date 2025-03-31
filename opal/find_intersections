@@ -1,0 +1,77 @@
+Étape 1 : Extraire les espèces de chaque base
+1. Kraken2 (NCBI/Greengenes/Silva)
+bash
+Copy
+kraken2-inspect --db kraken_db | awk '$1 == "S" {print $2}' > kraken_species.txt
+2. MetaPhlAn (ChocoPhlAn)
+bash
+Copy
+# Les espèces sont dans le fichier mpa_vJan21_m200.fna.bz2
+bzcat mpa_vJan21_m200.fna.bz2 | grep '>' | cut -d'|' -f2 | sort -u > metaphlan_species.txt
+3. mOTUs (mOTU DB)
+bash
+Copy
+# Liste des clusters mOTUs v3
+cut -f2,3 motus_db/db_mOTU/CAMI_metadata.tsv | grep -w "species" | cut -f1 > motus_species.txt
+4. Sylph (GenBank)
+bash
+Copy
+# Les espèces sont dans les noms des fichiers .msh
+find sylph_db -name "*.msh" | sed 's/.*_\([0-9]\+\)\.msh/\1/' > sylph_taxids.txt
+5. Meteor (MSP)
+python
+Copy
+# Extraire les MSPs du catalogue Meteor
+from Bio import SeqIO
+import gzip
+
+with gzip.open("meteor_human_gut_catalogue.faa.gz", "rt") as f:
+    species = {rec.description.split("|")[1] for rec in SeqIO.parse(f, "fasta")}
+
+with open("meteor_species.txt", "w") as f:
+    f.write("\n".join(species))
+Étape 2 : Standardiser les identifiants taxonomiques
+a. Conversion vers NCBI Taxonomy ID
+python
+Copy
+from ete3 import NCBITaxa
+ncbi = NCBITaxa()
+
+def name_to_taxid(species_name):
+    try:
+        return ncbi.get_name_translator([species_name])[species_name][0]
+    except:
+        return None
+b. Gestion des bases non-NCBI (ex: GTDB)
+bash
+Copy
+# Télécharger la table de correspondance GTDB -> NCBI
+wget https://data.gtdb.ecogenomic.org/releases/latest/ar53_metadata.tar.gz
+tar -xzvf ar53_metadata.tar.gz
+awk -F'\t' '{print $1 "\t" $107}' ar53_metadata_*.tsv > gtdb_ncbi_map.tsv
+Étape 3 : Trouver l'intersection des espèces
+Script Python
+python
+Copy
+import pandas as pd
+
+# Charger toutes les listes
+databases = {
+    "kraken": pd.read_csv("kraken_species.txt", names=["taxid"]),
+    "metaphlan": pd.read_csv("metaphlan_species.txt", names=["name"]),
+    "motus": pd.read_csv("motus_species.txt", names=["motu_id"]),
+    "sylph": pd.read_csv("sylph_taxids.txt", names=["taxid"]),
+    "meteor": pd.read_csv("meteor_species.txt", names=["msp_id"])
+}
+
+# Conversion vers taxid NCBI
+databases["metaphlan"]["taxid"] = databases["metaphlan"]["name"].apply(name_to_taxid)
+databases["motus"] = pd.merge(databases["motus"], motus_gtdb_map, on="motu_id")["ncbi_taxid"]
+databases["meteor"] = pd.merge(databases["meteor"], meteor_msp_map, on="msp_id")["ncbi_taxid"]
+
+# Intersection finale
+common_taxids = set(databases["kraken"]["taxid"])
+for db in databases.values():
+    common_taxids &= set(db["taxid"])
+    
+print(f"Nombre d'espèces communes : {len(common_taxids)}")
