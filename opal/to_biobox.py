@@ -12,7 +12,7 @@ def mpa_to_biobox(profile):
     )
     mpa_profile_species = mpa_profile[mpa_profile["#clade_name"].str.contains(r"s__.+$", na=False)]
     mpa_profile_species=mpa_profile.replace(r";", "|", regex=True)
-    mpa_profile_species.rename(columns={"#clade_name":"gtdb_r220_classification"}, inplace=True)
+    mpa_profile_species.rename(columns={"#clade_name":"gtdb_r207_classification"}, inplace=True)
     # gtdb_r220_classification	relative_abundance = les colonnes
     # mpa_profile_species['species'] = mpa_profile_species['gtdb_r220_classification'].str.extract(r's__([^;]+)')
     mpa_profile_species.drop(columns="level", inplace=True)
@@ -24,8 +24,8 @@ def mpa_to_biobox(profile):
     # metaphlan_species.drop(columns=["old_taxonomy","gtdb_r220_classification"], inplace=True)
     # metaphlan_species.rename(columns={"new_taxonomy":"gtdb_r220_classification"}, inplace=True)
     mpa_profile_species['rank'] = 'species'
-    mpa_profile_species["gtdb_ID"] = mpa_profile_species["gtdb_r220_classification"]
-    mpa_profile_species["taxpath"] = mpa_profile_species["gtdb_r220_classification"]
+    mpa_profile_species["gtdb_ID"] = mpa_profile_species["gtdb_r207_classification"]
+    mpa_profile_species["taxpath"] = mpa_profile_species["gtdb_r207_classification"]
     mpa_profile_species = mpa_profile_species[['gtdb_ID', 'rank','taxpath', 'relative_abundance']]
     mpa_profile_species.rename(columns={"gtdb_ID":"@@TAXID","rank": "RANK","taxpath": "TAXPATH","relative_abundance": "PERCENTAGE"}, inplace=True)
     new_column_order = ["@@TAXID", "RANK", "TAXPATH", "PERCENTAGE"]
@@ -36,11 +36,11 @@ def sylph_to_biobox(profile):
     sylph_profile=pd.read_csv(profile, sep="\t", header=1)
     sylph_species=sylph_profile[sylph_profile["clade_name"].str.contains(r"s__.+$", na=False)]
     sylph_species.drop(columns=["sequence_abundance", "ANI (if strain-level)", " Coverage (if strain-level)"], inplace=True)    
-    sylph_species.rename(columns={"clade_name":"gtdb_r220_classification"}, inplace=True)
-    sylph_species['species'] = sylph_species['gtdb_r220_classification'].str.extract(r's__([^;]+)')
+    sylph_species.rename(columns={"clade_name":"gtdb_r207_classification"}, inplace=True)
+    sylph_species['species'] = sylph_species['gtdb_r207_classification'].str.extract(r's__([^;]+)')
     sylph_species['rank'] = 'species'
-    sylph_species["gtdb_ID"] = sylph_species["gtdb_r220_classification"]
-    sylph_species["taxpath"] = sylph_species["gtdb_r220_classification"]    
+    sylph_species["gtdb_ID"] = sylph_species["gtdb_r207_classification"]
+    sylph_species["taxpath"] = sylph_species["gtdb_r207_classification"]    
     sylph_species = sylph_species[['gtdb_ID', 'rank', 'taxpath', 'relative_abundance']]
     sylph_species.rename(columns={"gtdb_ID":"@@TAXID","rank": "RANK","taxpath": "TAXPATH","relative_abundance": "PERCENTAGE"}, inplace=True)
     new_column_order = ["@@TAXID", "RANK", "TAXPATH", "PERCENTAGE"]
@@ -58,25 +58,25 @@ def bracken_to_biobox(profile):
     sep="\t",
     header=None
     )
-    bac120.rename(columns={0: "gtdb_ID", 1: "gtdb_r220_classification"}, inplace=True)
+    bac120.rename(columns={0: "gtdb_ID", 1: "gtdb_r207_classification"}, inplace=True)
     # Extraire les parties après g__ et s__
     # Extraire la partie après s__
-    bac120['species'] = bac120['gtdb_r220_classification'].str.extract(r's__([^;]+)')
-    bac120['gtdb_r220_classification'] = bac120['gtdb_r220_classification'].str.replace(';', '|', regex=False)
+    bac120['species'] = bac120['gtdb_r207_classification'].str.extract(r's__([^;]+)')
+    bac120['gtdb_r207_classification'] = bac120['gtdb_r207_classification'].str.replace(';', '|', regex=False)
     ar54=pd.read_csv(
     "/shared/projects/mudis4ls_is4_benchmark/gtdb/ar53_taxonomy_r220.tsv",
     sep="\t",
     header=None
     )
-    ar54.rename(columns={0: "gtdb_ID", 1: "gtdb_r220_classification"}, inplace=True)
+    ar54.rename(columns={0: "gtdb_ID", 1: "gtdb_r207_classification"}, inplace=True)
     # Extraire les parties après g__ et s__
     # Extraire la partie après s__
-    ar54['species'] = ar54['gtdb_r220_classification'].str.extract(r's__([^;]+)')
-    ar54['gtdb_r220_classification'] = ar54['gtdb_r220_classification'].str.replace(';', '|', regex=False)
+    ar54['species'] = ar54['gtdb_r207_classification'].str.extract(r's__([^;]+)')
+    ar54['gtdb_r207_classification'] = ar54['gtdb_r207_classification'].str.replace(';', '|', regex=False)
     ar_bac = pd.concat([bac120, ar54], ignore_index=True)
     bracken=bracken.merge(ar_bac, on="species", how="inner")
-    bracken = bracken[['gtdb_r220_classification', 'rank', 'species', 'fraction_total_reads']]
-    bracken['gtdb_ID'] = bracken['gtdb_r220_classification']
+    bracken = bracken[['gtdb_r207_classification', 'rank', 'species', 'fraction_total_reads']]
+    bracken['gtdb_ID'] = bracken['gtdb_r207_classification']
     bracken.rename(columns={"fraction_total_reads":"relative_abundance"}, inplace=True)
     bracken["relative_abundance"]=bracken["relative_abundance"]*100
     new_column_names=["@@TAXID", "RANK", "TAXPATHSN", "PERCENTAGE","TAXPATH"] 
@@ -103,3 +103,17 @@ def meteor_to_biobox(profile):
     meteor = meteor[['gtdb_ID', 'rank', 'species', 'abundance']]
     meteor["relative_abundance"]=meteor["relative_abundance"]*100
 
+
+
+
+
+motus
+# Given that GTDB annotation revealed that a single mOTU could be assigned to different species (e.g., the
+# mOTU ref_mOTU_v3_02367 corresponds to both Phocaeicola vulgatus and Phocaeicola dorei), we
+# manually curated the taxonomic annotation of mOTUs with multiple GTDB assignments to (i) remove
+# incorrect assignments (e.g., the Phocaeicola vulgatus/dorei mOTU ref_mOTU_v3_02367 was also
+# incorrectly assigned to Gastranaerophilaceae CAG-196 sp002102975) and (ii) establish the list of GTDB
+# species from gold standard that could not be distinguished. Notably, we merged gold standard
+# abundance of 4 Enterobacter sp. (E. kobei, E. ludwigii, E. roggenkampii and E. hormaechei A) into a
+# single species to match motus ref_mOTU_v3_00077. The list of curated species is available in Supp.
+# Table 6-7. 

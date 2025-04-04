@@ -1,0 +1,149 @@
+1. Sélection des espèces communes (select_common_species.sh)
+bash
+Copy
+#!/bin/bash
+#SBATCH --job-name=common_species
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=20G
+
+# Charger les modules nécessaires
+module load conda taxonkit aria2
+
+# Config
+BASE_DIR="/shared/databases"
+OUT_DIR="/shared/gold_standard"
+mkdir -p ${OUT_DIR}
+
+# Extraction des espèces pour chaque outil
+extract_species() {
+    # Kraken2
+    kraken2-inspect --db ${BASE_DIR}/kraken | awk '$1 == "S" {print $2}' > ${OUT_DIR}/kraken_species.txt
+    
+    # MetaPhlAn
+    bzcat ${BASE_DIR}/metaphlan/mpa_vJan21.fna.bz2 | grep '>' | cut -d'|' -f2 | sort -u > ${OUT_DIR}/metaphlan_species.txt
+    
+    # mOTUs
+    cut -f2,3 ${BASE_DIR}/motus/db_mOTU/CAMI_metadata.tsv | awk -F'\t' '$2 == "species" {print $1}' > ${OUT_DIR}/motus_species.txt
+    
+    # Sylph
+    find ${BASE_DIR}/sylph -name "*.msh" | sed -E 's/.*_([0-9]+)\.msh/\1/' > ${OUT_DIR}/sylph_taxids.txt
+    
+    # Meteor
+    python3 -c "import gzip, re
+from Bio import SeqIO
+with gzip.open('${BASE_DIR}/meteor/catalogue.faa.gz', 'rt') as f:
+    with open('${OUT_DIR}/meteor_species.txt', 'w') as out:
+        for rec in SeqIO.parse(f, 'fasta'):
+            match = re.search(r'\[MSP=([^\]]+)\]', rec.description)
+            if match: out.write(match.group(1) + '\n')"
+}
+
+# Conversion en TaxID NCBI
+convert_to_taxid() {
+    # Meteor MSP vers TaxID
+    awk 'FNR==NR {map[$1]=$2; next} {print map[$1]}' ${BASE_DIR}/meteor/msp_to_taxid.tsv ${OUT_DIR}/meteor_species.txt > ${OUT_DIR}/meteor_taxids.txt
+    
+    # Conversion des noms
+    taxonkit name2taxid -i 1 ${OUT_DIR}/metaphlan_species.txt | cut -f2 > ${OUT_DIR}/metaphlan_taxids.txt
+    taxonkit name2taxid -i 1 ${OUT_DIR}/motus_species.txt | cut -f2 > ${OUT_DIR}/motus_taxids.txt
+    
+    # Fichiers finaux
+    cat ${OUT_DIR}/{kraken,metaphlan,motus,sylph,meteor}_taxids.txt | sort | uniq -c | 
+    awk '$1 == 5 {print $2}' > ${OUT_DIR}/common_taxids.txt
+}
+
+# Téléchargement des génomes
+download_genomes() {
+    mkdir -p ${OUT_DIR}/genomes
+    taxonkit list --ids $(cat ${OUT_DIR}/common_taxids.txt) --data-dir ${BASE_DIR}/taxdump -n -r |
+    xargs -I{} datasets download genome taxid {} --filename ${OUT_DIR}/genomes/{}.zip
+    
+    parallel -j 8 'unzip -q {} -d ${OUT_DIR}/genomes && rm {}' ::: ${OUT_DIR}/genomes/*.zip
+}
+
+# Workflow principal
+extract_species
+convert_to_taxid
+download_genomes
+2. Génération du Gold Standard (generate_gold_standard.R)
+r
+Copy
+#!/usr/bin/env Rscript
+library(EnvStats)
+library(Biostrings)
+
+set.seed(42)
+species <- readLines("/shared/gold_standard/common_taxids.txt")
+n_species <- length(species)
+
+# Génération des abondances log-normales
+abundances <- rlnormTrunc(n_species, meanlog = 1, sdlog = 2, min = 1e-6, max = 1)
+abundances <- abundances / sum(abundances)
+
+# Création du profil
+gold_standard <- data.frame(
+  taxid = species,
+  abundance = abundances,
+  genome_path = sapply(species, function(x) {
+    list.files("/shared/gold_standard/genomes", 
+               pattern = paste0(x, "_.*fna"), 
+               full.names = TRUE)[1]
+  })
+)
+
+# Vérification des génomes
+gold_standard <- gold_standard[!is.na(gold_standard$genome_path), ]
+
+# Sauvegarde
+write.csv(gold_standard, "/shared/gold_standard/gold_profile.csv", row.names = FALSE)
+3. Simulation des Reads (simulate_reads.sh)
+bash
+Copy
+#!/bin/bash
+#SBATCH --job-name=read_sim
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=32
+#SBATCH --mem=50G
+
+module load samtools wgsim
+
+# Config
+PROFILE="/shared/gold_standard/gold_profile.csv"
+OUT_DIR="/shared/simulated_reads"
+TOTAL_READS=10000000
+READ_LENGTH=150
+
+mkdir -p ${OUT_DIR}
+
+# Génération des proportions
+awk -F, 'NR>1 {print $3, $2}' ${PROFILE} > ${OUT_DIR}/genome_weights.txt
+
+# Simulation avec WGSIM en parallèle
+cat ${OUT_DIR}/genome_weights.txt | while read genome weight; do
+    reads=$(printf "%.0f" $(echo "${TOTAL_READS} * ${weight}" | bc))
+    
+    ( 
+        bgzip -dc ${genome} > ${OUT_DIR}/temp.fa
+        wgsim -N ${reads} -1 ${READ_LENGTH} -2 ${READ_LENGTH} ${OUT_DIR}/temp.fa \
+            ${OUT_DIR}/${reads}_1.fq \
+            ${OUT_DIR}/${reads}_2.fq
+        rm ${OUT_DIR}/temp.fa
+    ) &
+    
+    if (( $(jobs -r -p | wc -l) >= 32 )); then
+        wait -n
+    fi
+done
+
+wait
+
+# Combinaison des fichiers
+cat ${OUT_DIR}/*_1.fq > ${OUT_DIR}/simulated_1.fq
+cat ${OUT_DIR}/*_2.fq > ${OUT_DIR}/simulated_2.fq
+rm ${OUT_DIR}/*_[12].fq
+
+# Validation finale
+echo "Reads simulés :"
+echo "  Forward: $(wc -l ${OUT_DIR}/simulated_1.fq | awk '{print $1/4}')"
+echo "  Reverse: $(wc -l ${OUT_DIR}/simulated_2.fq | awk '{print $1/4}')"
