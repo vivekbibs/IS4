@@ -1,0 +1,13 @@
+# Décompressez le fichier de marqueurs et extrayez les espèces
+bzcat mpa_vJan21_CHOCOPhlAnSGB_201901.fna.bz2 | 
+  grep '>' | 
+  awk -F'|' '{print $NF}' | 
+  sed 's/^s__//;s/_/ /g' | 
+  sort -u > metaphlan4_species_list.txt
+
+
+# Pour obtenir la liste avec les identifiants TaxID NCBI :
+bzcat mpa_vJan21_CHOCOPhlAnSGB_201901.fna.bz2 | 
+  grep '>' | 
+  awk -F'|' '{print $(NF-1)"\t"$NF}' | 
+  sed 's/^t__//;s/s__//' > species_with_taxid.tsv

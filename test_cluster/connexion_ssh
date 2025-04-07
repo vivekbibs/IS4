@@ -9,3 +9,5 @@ code --remote ssh-remote+vashokan@core.cluster.france-bioinformatique.fr
 kill -9 $(ps aux | grep vscode-server | grep $USER | grep -v grep | awk '{print $2}')
 # Delete related files and folder
 rm -rf $HOME/.vscode-server # Or ~/.vscode-server-insiders
+
+/shared/projects/mudis4ls_is4_benchmark
