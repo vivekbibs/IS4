@@ -1,1 +1,0 @@
-kraken2-build --standard --threads $SLURM_CPUS_PER_TASK --db /shared/projects/mudis4ls_is4_benchmark/BDs
