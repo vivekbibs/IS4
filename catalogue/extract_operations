@@ -1,0 +1,39 @@
+#!/usr/bin/env python
+import requests
+import json
+
+# Config variables
+BIOTOOLS_API_URL = "https://bio.tools"
+
+def get_edam_operations():
+    """
+    Récupère les opérations EDAM de tous les outils présents dans bio.tools.
+    """
+    # URL de l'API bio.tools pour récupérer tous les outils
+    tools_url = f"{BIOTOOLS_API_URL}/api/tool/?format=json&page_size=1000"
+
+    # Récupérer tous les outils
+    response = requests.get(tools_url)
+    if response.status_code != 200:
+        print(f"Erreur lors de la récupération des outils: {response.status_code}")
+        return
+
+    tools = response.json()["list"]
+
+    # Extraire les opérations EDAM pour chaque outil
+    edam_operations = []
+    for tool in tools:
+        if "function" in tool:
+            for func in tool["function"]:
+                if "operation" in func:
+                    for op in func["operation"]:
+                        edam_operations.append(op["term"])
+
+    # Enregistrer les opérations EDAM dans un fichier JSON
+    with open("edam_operations.json", "w") as f:
+        json.dump(edam_operations, f, indent=4)
+
+    print("Les opérations EDAM ont été enregistrées dans edam_operations.json")
+
+if __name__ == "__main__":
+    get_edam_operations()

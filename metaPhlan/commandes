@@ -1,0 +1,1 @@
+metaphlan /shared/projects/mudis4ls_is4_benchmark/test_data_meteor/fastq/ERS12377136.fastq.gz --input_type fastq -o "/shared/projects/mudis4ls_is4_benchmark/IS4_repo/metaPhlan/output_dir/profiled_metagenome_test.txt
