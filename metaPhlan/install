@@ -12,3 +12,5 @@ If you install the database in a different location, remember to run MetaPhlAn u
 conda remove -n metaphlan metaphlan
 
 
+metaphlan --install --bowtie2db /shared/projects/mudis4ls_is4_benchmark/conda/envs/mpa_test/DB
+
