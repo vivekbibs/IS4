@@ -1,1 +1,0 @@
-sbatch /home/vashokan/Bureau/IS4/kraken/kraken_DB_download.sbatch

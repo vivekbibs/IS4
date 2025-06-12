@@ -1,0 +1,4 @@
+JobID           JobName  Partition  AllocCPUS      State ExitCode    Elapsed   NNodes   NTasks     MaxRSS 
+------------ ---------- ---------- ---------- ---------- -------- ---------- -------- -------- ---------- 
+55574000     kraken_in+       fast          1    RUNNING      0:0   04:05:50        1                     
+55574000.ba+      batch                     1    RUNNING      0:0   04:05:50        1        1            
