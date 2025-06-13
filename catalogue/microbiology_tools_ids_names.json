@@ -1,0 +1,202 @@
+[
+    {
+        "id": "mri_image_intensity_normalization",
+        "name": "MRI Image intensity normalization"
+    },
+    {
+        "id": "BlobToolKit",
+        "name": "BlobToolKit"
+    },
+    {
+        "id": "nlmced_filter",
+        "name": "NLmCED Filter"
+    },
+    {
+        "id": "pr2",
+        "name": "PR2"
+    },
+    {
+        "id": "plaza_4.0",
+        "name": "PLAZA 4.0"
+    },
+    {
+        "id": "mudoger",
+        "name": "MuDoGeR"
+    },
+    {
+        "id": "nextprot",
+        "name": "neXtProt"
+    },
+    {
+        "id": "metidfyr",
+        "name": "MetIDfyR"
+    },
+    {
+        "id": "ensembleflex",
+        "name": "EnsembleFlex"
+    },
+    {
+        "id": "lpsn",
+        "name": "LPSN"
+    },
+    {
+        "id": "bto",
+        "name": "The BRENDA Tissue Ontology (BTO)"
+    },
+    {
+        "id": "straininfo",
+        "name": "StrainInfo"
+    },
+    {
+        "id": "isfinder",
+        "name": "ISfinder"
+    },
+    {
+        "id": "bacdive_ws",
+        "name": "BacDive API"
+    },
+    {
+        "id": "pharmmapper-drug",
+        "name": "PharmMapper"
+    },
+    {
+        "id": "jcat",
+        "name": "JCat"
+    },
+    {
+        "id": "open_phacts_chemistry_registry_system",
+        "name": "Open PHACTS Chemistry Registry System"
+    },
+    {
+        "id": "genepath",
+        "name": "GenePath2"
+    },
+    {
+        "id": "ptarget",
+        "name": "pTARGET"
+    },
+    {
+        "id": "asepcr",
+        "name": "ASePCR"
+    },
+    {
+        "id": "predictregulon",
+        "name": "PredictRegulon"
+    },
+    {
+        "id": "reduce",
+        "name": "REDUCE"
+    },
+    {
+        "id": "promoterplot",
+        "name": "PromoterPlot"
+    },
+    {
+        "id": "loctarget",
+        "name": "LOCtarget"
+    },
+    {
+        "id": "cpa",
+        "name": "CPA - Comparative Pathway Analyzer"
+    },
+    {
+        "id": "selox",
+        "name": "SeLOX"
+    },
+    {
+        "id": "pbsword",
+        "name": "PBSword"
+    },
+    {
+        "id": "chipd",
+        "name": "chipD"
+    },
+    {
+        "id": "marq",
+        "name": "MARQ"
+    },
+    {
+        "id": "posmed",
+        "name": "PosMed"
+    },
+    {
+        "id": "crisprcompar",
+        "name": "CRISPRcompar"
+    },
+    {
+        "id": "caspr",
+        "name": "CaspR"
+    },
+    {
+        "id": "phydbac2",
+        "name": "Phydbac2"
+    },
+    {
+        "id": "copub",
+        "name": "CoPub"
+    },
+    {
+        "id": "pharmmapper",
+        "name": "PharmMapper"
+    },
+    {
+        "id": "mirz",
+        "name": "MirZ"
+    },
+    {
+        "id": "wavicgh",
+        "name": "waviCGH"
+    },
+    {
+        "id": "soapdb",
+        "name": "soaPDB"
+    },
+    {
+        "id": "orest",
+        "name": "OREST"
+    },
+    {
+        "id": "rci",
+        "name": "RCI"
+    },
+    {
+        "id": "nast",
+        "name": "NAST"
+    },
+    {
+        "id": "virgo",
+        "name": "VIRGO"
+    },
+    {
+        "id": "jprogo",
+        "name": "JProGO"
+    },
+    {
+        "id": "lis",
+        "name": "Legume Information System (LIS)"
+    },
+    {
+        "id": "promfd",
+        "name": "PromFD"
+    },
+    {
+        "id": "idrug-target",
+        "name": "iDrug-Target"
+    },
+    {
+        "id": "icdi-psefpt",
+        "name": "iCDI-PseFpt"
+    },
+    {
+        "id": "k-map",
+        "name": "K-Map"
+    },
+    {
+        "id": "sensipath",
+        "name": "SensiPath"
+    },
+    {
+        "id": "shinymb",
+        "name": "ShinyMB"
+    }
+]
