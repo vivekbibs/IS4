@@ -1,2 +1,8 @@
 https://bio.tools/api/tool/?operationID=operation_3460 
 Donne un fichier json avec tous les outils après filtre
+https://bio.tools/api/tool/kraken2/?format=yaml 
+
+https://biotools.readthedocs.io/en/latest/api_reference.html#filtering 
+
+#(taxonomic_classification + metagenomics) = 75
+https://bio.tools/api/tool/?operationID=operation_3460&topic=%22Metagenomics%22 ==> possibilité de télécharger au format voulu via get ou bouton get
